@@ -1,26 +1,40 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class dbconnector implements IDATENHALTUNG {
 	private Connection conn;
 	private Statement stmt;
 	private ResultSet rs = null;
+	Scanner scan = new Scanner(System.in);
+	String url, address, user, password;
 	
 	public dbconnector() {
 		initDB();
 	}
 
 	private void initDB() {
-		
+		try{
+		System.out.println("What is the DB Server Address");
+		address = scan.next();
+		url = "jdbc:mysql://"+address+"/?rewriteBatchedStatements=true";
+		System.out.println("What is the DB User");
+		user = scan.next();
+		System.out.println("What is the DB Password");
+		password = scan.next();
+		} catch (Exception e){
+			System.out.println("Perfekt direkt nen error :)");
+		}
 		try {
             Class.forName("com.mysql.jdbc.Driver");
-            
+            conn = DriverManager.getConnection(url, user, password);
             stmt = conn.createStatement();
         } catch (Exception ex) {
-            // handle the error
-        }
+            System.out.println("Driver error: \n "+ ex.getMessage());
+		}
 		return;
 	}
 	

@@ -15,6 +15,22 @@ public class TUI {
 	
 	private void initTUI() {
 		
+		System.out.println("DO youi want to create new DB?");
+		 String dbName = "TestDB";
+
+	        String query0 = "CREATE DATABASE IF NOT EXISTS `" + dbName + "`";
+
+	        String query1 = "USE `" + dbName + "`";
+
+	        String query2 = "SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO'; ";
+
+	        String query3 = "CREATE TABLE IF NOT EXISTS `Studenten` ("
+	                + "`Name` varchar(100) NOT NULL DEFAULT '', "
+	                + "`Vorname` varchar(100) NOT NULL DEFAULT '', "
+	                + "`ID` varchar(50) NOT NULL, " + "UNIQUE KEY `ID` (`ID`)"
+	                + ") ENGINE=MyISAM DEFAULT CHARSET=utf8 "
+	                + "DEFAULT COLLATE=utf8_german2_ci";
+		
 		while(menu) {
 		System.out.println("Kundenverwaltungs Menue");
 		System.out.println("Waehle deine Zukunft!");
