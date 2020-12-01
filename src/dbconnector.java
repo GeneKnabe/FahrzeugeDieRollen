@@ -16,6 +16,7 @@ public class dbconnector implements IDATENHALTUNG {
 		
 		try {
             Class.forName("com.mysql.jdbc.Driver");
+            
             stmt = conn.createStatement();
         } catch (Exception ex) {
             // handle the error
@@ -70,7 +71,7 @@ public class dbconnector implements IDATENHALTUNG {
 	@Override
 	public void addFahrzeug(String markeM, String modellM, String farbeM, int wertM, int besitzerM) {
 		try {
-			rs = stmt.executeQuery("INSERT INTO kunden (besitzer, marke, modell, farbe, wert) VALUES ("+ besitzerM + ", " + markeM + ", "+ modellM +", "+ farbeM +", "+ wertM +");");
+			rs = stmt.executeQuery("INSERT INTO fahrzeuge (besitzer, marke, modell, farbe, wert) VALUES ("+ besitzerM + ", " + markeM + ", "+ modellM +", "+ farbeM +", "+ wertM +");");
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
