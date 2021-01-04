@@ -77,6 +77,7 @@ public class GUI implements ActionListener {
 	
 	
 	//Variable zum übergeben und speichern in der Funktion
+	private String placeholder;
 	private int USER;
 	private String NAME;
 	private char GESCHLECHT;
@@ -130,16 +131,19 @@ public class GUI implements ActionListener {
 
 		}
 		if(e.getSource() == add) {
+			
+			//Speichern der eingegebenen Werte in Variablen
 			ID = Integer.parseInt(ids.getText());
 			NAME = namen.getText();
-			GESCHLECHT = geschlecht.getText().charAt(0);
-
+			placeholder = (String)geschlechter.getSelectedItem();
+			GESCHLECHT = placeholder.charAt(0);
 			NUMMER = Integer.parseInt(nummern.getText());
 			MARKE = marken.getText();
 			MODELL = modelle.getText();
 			FARBE = farben.getText();
 			WERT = Integer.parseInt(werte.getText());
 			
+			//Ausführen der Funktionen mit übergeben der Parameter (aus den Variablen)
 			daten.addPerson(NAME, GESCHLECHT);
 			daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
 			
@@ -147,8 +151,11 @@ public class GUI implements ActionListener {
 		}
 		if(e.getSource() == delete) {
 			
+			//Speichern der eingegebenen Werte in Variablen
 			ID = Integer.parseInt(ids.getText());
 			NUMMER = Integer.parseInt(nummern.getText());
+			
+			//Ausführen der Funktionen mit übergeben der Parameter (aus den Variablen)
 			daten.delPerson(ID);
 			daten.delFahrzeug(NUMMER);
 			
@@ -269,13 +276,13 @@ public class GUI implements ActionListener {
 		check.addActionListener(this);
 		panel.add(check);
 		
-		//Hinzufï¿½gen Button
-		add = new JButton("Hinzufï¿½gen");
+		//Hinzufuegen Button
+		add = new JButton("Hinzufuegen");
 		add.setBounds(460, 110, 100, 25);
 		add.addActionListener(this);
 		panel.add(add);
 		
-		//Lï¿½schen Button
+		//Loeschen Button
 		delete = new JButton("Entfernen");
 		delete.setBounds(460, 140, 100, 25);
 		delete.addActionListener(this);
@@ -289,12 +296,12 @@ public class GUI implements ActionListener {
 	}
 	
 	public void addDropdown() {
-		//Dropdown fï¿½r Geschlecht
+		//Dropdown fuer Geschlecht
 		geschlechter = new JComboBox<>(comboboxliste);
 		geschlechter.setBounds(280, 40, 100, 25);
 		panel.add(geschlechter);
 		
-		//Dropdown fï¿½r Geschlecht
+		//Dropdown fuer Geschlecht
 		suchende = new JComboBox(suchenliste);
 		suchende.setBounds(90, 200, 125, 25);
 		panel.add(suchende);
