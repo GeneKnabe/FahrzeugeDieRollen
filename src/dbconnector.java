@@ -77,11 +77,9 @@ public class dbconnector implements IDATENHALTUNG {
 		try {
 			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
 			stmt.executeUpdate("INSERT INTO person (name, geschlecht) VALUES ('" + name + "', '" + geschlecht + "');");
-			rs.next();
 			rs = stmt.executeQuery("SELECT kundennummer FROM person WHERE '"+ name +"' = name AND '"+ geschlecht +"' = geschlecht;");
-			while(rs.next()) {
-			System.out.println("Kundennummer: "+ rs.getInt("kundennummer"));
-			}
+			rs.next();
+			System.out.println("Kundennummer: "+ rs.getInt(1));
 		} catch (Exception ex) {
 				System.out.println(ex);
 			}
