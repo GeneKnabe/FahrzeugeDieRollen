@@ -1,6 +1,3 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,7 +17,7 @@ public class dbconnector implements IDATENHALTUNG {
 		try{
 		System.out.println("What is the DB Server Address");
 		address = scan.next();
-		url = "jdbc:mysql://"+address+"/?rewriteBatchedStatements=true";
+		url = "jdbc:mysql://" + address + ":3306/";
 		System.out.println("What is the DB User");
 		user = scan.next();
 		System.out.println("What is the DB Password");
@@ -29,21 +26,63 @@ public class dbconnector implements IDATENHALTUNG {
 			System.out.println("Perfekt direkt nen error :)");
 		}
 		try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
             stmt = conn.createStatement();
         } catch (Exception ex) {
             System.out.println("Driver error: \n "+ ex.getMessage());
 		}
-		return;
-	}
+		
+		System.out.println("Do you want to create new DB? (y/n)");
+		char abfrage = scan.next().charAt(0);
+		if((abfrage == 'y') || (abfrage == 'Y')){
+		String dbName = "FahrzeugeDieRollen";
+
+		 try {
+			stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS `" + dbName + "`");
+		} catch (SQLException e) {
+			System.out.println(" DB Create error 1:" + e.getMessage()); 
+		}
+
+		 try {
+			stmt.executeUpdate("USE `" + dbName + "`");
+		} catch (SQLException e) {
+			System.out.println(" DB Create error 2:" + e.getMessage());
+		}
+
+		 try {
+			 stmt.executeUpdate("SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO'; ");
+		} catch (SQLException e) {
+			System.out.println(" DB Create error 3:" + e.getMessage());
+		}
+
+		 try {
+			 stmt.executeUpdate("CREATE TABLE `"+ dbName +"`.`person` ( `kundennummer` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(60) NOT NULL , `geschlecht` CHAR NOT NULL , PRIMARY KEY (`kundennummer`)) ENGINE = InnoDB;");
+			 stmt.executeUpdate("CREATE TABLE `"+ dbName +"`.`fahrzeug` ( `fahrzeugnummer` INT NOT NULL AUTO_INCREMENT , `marke` VARCHAR(60) NOT NULL , `modell` VARCHAR(60) NOT NULL , `farbe` VARCHAR(60) NOT NULL , `wert` INT NOT NULL , `kundennummer` INT NOT NULL , PRIMARY KEY (`fahrzeugnummer`)) ENGINE = InnoDB;");
+		} catch (SQLException e) {
+			System.out.println(" DB Create error 4:" + e.getMessage());
+		}
+		} else if ((abfrage == 'n') || (abfrage == 'N')) {
+			return;
+		}else {
+			System.exit(1);
+		}
+		 return;
+		}
+		
 	
 	@Override
 	public void addPerson(String name, char geschlecht) {
 		// TODO Auto-generated method stub
 		try {
-			rs = stmt.executeQuery("INSERT INTO kunden (name, geschlecht) VALUES (" + name + ", " + geschlecht + ");");
-			} catch (Exception ex) {
+			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
+			stmt.executeUpdate("INSERT INTO person (name, geschlecht) VALUES ('" + name + "', '" + geschlecht + "');");
+			rs.next();
+			rs = stmt.executeQuery("SELECT kundennummer FROM person WHERE '"+ name +"' = name AND '"+ geschlecht +"' = geschlecht;");
+			while(rs.next()) {
+			System.out.println("Kundennummer: "+ rs.getInt("kundennummer"));
+			}
+		} catch (Exception ex) {
 				System.out.println(ex);
 			}
 	}
