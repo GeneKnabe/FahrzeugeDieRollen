@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,13 +15,27 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUI implements ActionListener {
 	
+	
+	
+	private IDATENHALTUNG daten;
+	boolean menu = true;
+	int kundennummer, wahl;
+	person selected;
+	Scanner scan = new Scanner(System.in);
+	public GUI(dbconnector db) {
+		daten = db;
+		GUI();
+	}
+	
+	
+		
 	private JFrame frame;
 	private JPanel panel;
 	
 	
 	
-	//Array fï¿½r Combobox
-	private String comboboxliste[] = {"Mï¿½nnlich", "Weiblich", "Divers"}; 
+	//Array fuer Combobox
+	private String comboboxliste[] = {"Maennlich", "Weiblich", "Divers"}; 
 	private String suchenliste[] = {"ID", "Name", "Fahrzeugnr.", "Marke", "Modell", "Farbe", "Wert"}; 
 	private String spaltennamen[] = {"ID", "Name", "Geschlecht", "Fahrzeugnr.", "Marke", "Modell", "Farbe", "Wert"};
 	//Combobox
@@ -60,8 +75,22 @@ public class GUI implements ActionListener {
 	private DefaultTableModel model;
 	
 	
+	
+	//Variable zum übergeben und speichern in der Funktion
+	private int USER;
+	private String NAME;
+	private char GESCHLECHT;
+	private int ID;
+	private String AUTO;
+	private int NUMMER;
+	private String MARKE;
+	private String MODELL;
+	private String FARBE;
+	private int WERT;
+	
 
-	public GUI() {
+	private void GUI() {
+		
 		//Erstellen eine Fensters + Standard Einstellungen
 		frame = new JFrame();
 		panel = new JPanel();
@@ -72,16 +101,16 @@ public class GUI implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Fahrzeuge die Rollen");
 		
-		//Text Hinzufï¿½gen
+		//Text Hinzufuegen
 		addText();
 		
-		//Textboxen zum Schreiben hinzufï¿½gen
+		//Textboxen zum Schreiben Hinzufuegen
 		addTextbox();
 		
-		//Buttons hinzufï¿½gen
+		//Buttons Hinzufuegen
 		addButton();
 		
-		//Dorpdown hinzufï¿½gen
+		//Dorpdown Hinzufuegen
 		addDropdown();
 		
 		tabelle = new JTable(new DefaultTableModel(new Object[] {"","","","","","","",""}, 0));
@@ -92,14 +121,6 @@ public class GUI implements ActionListener {
 
 		frame.setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		new GUI();
-		
-		
-		
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -109,13 +130,27 @@ public class GUI implements ActionListener {
 
 		}
 		if(e.getSource() == add) {
+			ID = Integer.parseInt(ids.getText());
+			NAME = namen.getText();
+			GESCHLECHT = geschlecht.getText().charAt(0);
+
+			NUMMER = Integer.parseInt(nummern.getText());
+			MARKE = marken.getText();
+			MODELL = modelle.getText();
+			FARBE = farben.getText();
+			WERT = Integer.parseInt(werte.getText());
 			
-			ids.setText("");
+			daten.addPerson(NAME, GESCHLECHT);
+			daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
+			
 			
 		}
 		if(e.getSource() == delete) {
 			
-			ids.setText("");
+			ID = Integer.parseInt(ids.getText());
+			NUMMER = Integer.parseInt(nummern.getText());
+			daten.delPerson(ID);
+			daten.delFahrzeug(NUMMER);
 			
 		}		
 		if(e.getSource() == search) {
@@ -264,5 +299,13 @@ public class GUI implements ActionListener {
 		suchende.setBounds(90, 200, 125, 25);
 		panel.add(suchende);
 	}
-	
+	/*
+	public static void main(String[] args) {
+		new GUI();
+		
+		
+		
+		
+	}
+*/
 }
