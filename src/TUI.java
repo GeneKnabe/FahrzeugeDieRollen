@@ -29,12 +29,7 @@ public class TUI {
 		}
 		switch(wahl) {
 		case 1: 
-			System.out.println("Wier heisst der Kunde?");
-			String name = scan.next(); 
-			System.out.println("Welches Geschlecht hat der Kunde? (Char)");
-			char geschlecht = scan.next().charAt(0);
-			kundennummer = daten.addPerson(name, geschlecht);
-			System.out.println("Kundennummer ist: "+ kundennummer);
+			addPerson();
 			break;
 		case 2:
 			System.out.println("Welche Kundennummer hat der Kunde, welcher gelöscht werden soll");
@@ -60,6 +55,14 @@ public class TUI {
 			
 		}
 	}
+	}
+	private void addPerson() {
+			System.out.println("Wier heisst der Kunde?");
+			String name = scan.next(); 
+			System.out.println("Welches Geschlecht hat der Kunde? (Char)");
+			char geschlecht = scan.next().charAt(0);
+			kundennummer = daten.addPerson(name, geschlecht);
+			System.out.println("Kundennummer ist: "+ kundennummer);
 	}
 	private void addCarToKunde() {
 		 String markeM, modellM,  farbeM;

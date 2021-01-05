@@ -98,11 +98,12 @@ public class dbconnector implements IDATENHALTUNG {
 		char geschlecht = 'm';
 		try {
 			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
-			rs = stmt.executeQuery("Select * from Kunden where kundennummer is '" + kundennummer + "';");
+			rs = stmt.executeQuery("Select * from person where kundennummer = " + kundennummer + ";");
+			while(rs.next()) {
 			name = rs.getString(2);
 			geschlecht = rs.getString(3).charAt(0);
-			System.out.println("Kundennummer: "+ kundennummer + " Name: "+ name + " Gender: " + geschlecht);
-			new person(name, kundennummer, geschlecht);
+			}
+			//System.out.println("Kundennummer: "+ kundennummer + " Name: "+ name + " Gender: " + geschlecht);
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
