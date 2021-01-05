@@ -74,7 +74,8 @@ public class TUI {
 		 wertM = scan.nextInt();
 		 System.out.println("Kundennumer?");
 		 besitzerM = scan.nextInt();
-		daten.addFahrzeug( markeM, modellM, farbeM, wertM, besitzerM);
+		 int fahrzeugnummer = daten.addFahrzeug( markeM, modellM, farbeM, wertM, besitzerM);
+		 System.out.println("Das Fahrzeug hat die nummer "+ fahrzeugnummer +"bekommen");
 	}
 	private void removeCarFromKunde() {
 		System.out.println("Welche Fahrzeugnumer hat das Fahrzeug welches geloescht werden soll?");

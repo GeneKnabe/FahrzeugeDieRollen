@@ -110,17 +110,18 @@ public class dbconnector implements IDATENHALTUNG {
 		return selectedPerson;
 	}
 	@Override
-	public void addFahrzeug(String markeM, String modellM, String farbeM, int wertM, int besitzerM) {
+	public int addFahrzeug(String markeM, String modellM, String farbeM, int wertM, int besitzerM) {
 		try {
 			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
 			stmt.executeUpdate("INSERT INTO fahrzeug (kundennummer, marke, modell, farbe, wert) VALUES ('"+ besitzerM + "', '" + markeM + "', '"+ modellM +"', '"+ farbeM +"', '"+ wertM +"');");
 			rs = stmt.executeQuery("SELECT fahrzeugnummer FROM fahrzeug WHERE '"+ markeM +"' = marke AND '"+ modellM +"' = modell AND '"+ farbeM +"' = farbe AND '"+ wertM +"' = wert AND '"+ besitzerM +"' = kundennummer;");
 			rs.next();
-			System.out.println("Fahrzeugnummer: "+ rs.getInt(1));
+			int fahrzeugnummer = rs.getInt(1);
+			return fahrzeugnummer;
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
-		return ;
+		return 0;
 	}
 	@Override
 	public fahrzeug getFahrzeug(int fahrzeugnummer) {
