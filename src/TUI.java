@@ -92,10 +92,10 @@ public class TUI {
 		System.out.println("Lade Kunden Menue");
 		ArrayList<person> alleKunden = daten.getPersonen();
 		for(person pers : alleKunden) {
-			System.out.println("Kundennummer: " + pers.getKundennummer() + "\nName: " + pers.getName());
-			ArrayList<fahrzeug> AlleFahrzeugeZumKunden = daten.getFahrzeuge(kundennummer);
+			System.out.println("Kundennummer: " + pers.getKundennummer() + " Name: " + pers.getName()+ " Geschlecht: " + pers.getGeschlecht());
+			ArrayList<fahrzeug> AlleFahrzeugeZumKunden = daten.getFahrzeuge(pers.getKundennummer());
 			for(fahrzeug zeug : AlleFahrzeugeZumKunden) {
-				System.out.println("Fahrzeug: " + zeug.getFahrzeugnummer() + zeug.getMarke() + zeug.getModell() + zeug.getFarbe() + zeug.getWert());
+				System.out.println("Fahrzeugnummer: " + zeug.getFahrzeugnummer() +" Marke: " + zeug.getMarke() +" Modell: " + zeug.getModell() +" Farbe: " + zeug.getFarbe() +" Wert:" + zeug.getWert());
 			}
 		}
 	}

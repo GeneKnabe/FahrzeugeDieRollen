@@ -170,6 +170,22 @@ public class dbconnector implements IDATENHALTUNG {
 	@Override
 	public ArrayList<fahrzeug> getFahrzeuge(int Kundennummer) {
 		ArrayList<fahrzeug> fahrzeug = new ArrayList<>();
+		try {
+			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
+			rs = stmt.executeQuery("Select * from fahrzeug where kundennummer = '" + Kundennummer + "';");
+			while(rs.next()) {	
+				int fahrzeugnummer = rs.getInt(1);
+				String marke = rs.getString(2);
+				String modell = rs.getString(3);
+				String farbe = rs.getString(4);
+				int wert = rs.getInt(5);
+				int kundennummer = rs.getInt(6);
+				fahrzeug.add(new fahrzeug(marke,modell,farbe,fahrzeugnummer,wert,kundennummer));
+		} 
+		}catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 		return fahrzeug;
 	}
 
