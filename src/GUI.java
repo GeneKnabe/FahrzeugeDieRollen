@@ -74,6 +74,7 @@ public class GUI implements ActionListener {
 	
 	
 	//Variable zum übergeben und speichern in der Funktion
+	private String placeholder;
 	private int USER;
 	private String NAME;
 	private char GESCHLECHT;
@@ -129,17 +130,23 @@ public class GUI implements ActionListener {
 
 		}
 		if(e.getSource() == add) {
+			
+			//Speichern der eingegebenen Werte in Variablen
 			ID = Integer.parseInt(ids.getText());
 			NAME = namen.getText();
 			placeholder = (String)geschlechter.getSelectedItem();
 			GESCHLECHT = placeholder.charAt(0);
+<<<<<<< HEAD
 
+=======
+>>>>>>> da76a07bb08b42eb7e532b4e42baccea294d8491
 			NUMMER = Integer.parseInt(nummern.getText());
 			MARKE = marken.getText();
 			MODELL = modelle.getText();
 			FARBE = farben.getText();
 			WERT = Integer.parseInt(werte.getText());
 			
+			//Ausführen der Funktionen mit übergeben der Parameter (aus den Variablen)
 			daten.addPerson(NAME, GESCHLECHT);
 			daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
 			
@@ -147,8 +154,11 @@ public class GUI implements ActionListener {
 		}
 		if(e.getSource() == delete) {
 			
+			//Speichern der eingegebenen Werte in Variablen
 			ID = Integer.parseInt(ids.getText());
 			NUMMER = Integer.parseInt(nummern.getText());
+			
+			//Ausführen der Funktionen mit übergeben der Parameter (aus den Variablen)
 			daten.delPerson(ID);
 			daten.delFahrzeug(NUMMER);
 			
