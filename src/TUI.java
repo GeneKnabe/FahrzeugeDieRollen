@@ -36,7 +36,9 @@ public class TUI {
 			daten.addPerson(name, geschlecht);
 			break;
 		case 2:
-			daten.delPerson(selected.getKundennummer());
+			System.out.println("Welche Kundennummer hat der Kunde, welcher gelöscht werden soll");
+			kundennummer = scan.nextInt();
+			daten.delPerson(kundennummer);
 			break;
 		case 3:
 			System.out.println("Welche Kundennummer hat der Kunde?");
