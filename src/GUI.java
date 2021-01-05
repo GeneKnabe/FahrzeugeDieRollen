@@ -22,10 +22,7 @@ public class GUI implements ActionListener {
 	int kundennummer, wahl;
 	person selected;
 	Scanner scan = new Scanner(System.in);
-	public GUI(dbconnector db) {
-		daten = db;
-		GUI();
-	}
+	
 	
 	
 		
@@ -88,8 +85,10 @@ public class GUI implements ActionListener {
 	private String FARBE;
 	private int WERT;
 	
+	private String placeholder;
 
-	private void GUI() {
+	public GUI(dbconnector db) {
+		daten = db;
 		
 		//Erstellen eine Fensters + Standard Einstellungen
 		frame = new JFrame();
@@ -132,7 +131,8 @@ public class GUI implements ActionListener {
 		if(e.getSource() == add) {
 			ID = Integer.parseInt(ids.getText());
 			NAME = namen.getText();
-			GESCHLECHT = geschlecht.getText().charAt(0);
+			placeholder = (String)geschlechter.getSelectedItem();
+			GESCHLECHT = placeholder.charAt(0);
 
 			NUMMER = Integer.parseInt(nummern.getText());
 			MARKE = marken.getText();
@@ -269,13 +269,13 @@ public class GUI implements ActionListener {
 		check.addActionListener(this);
 		panel.add(check);
 		
-		//Hinzuf�gen Button
-		add = new JButton("Hinzuf�gen");
+		//Hinzufuegen Button
+		add = new JButton("Hinzufuegen");
 		add.setBounds(460, 110, 100, 25);
 		add.addActionListener(this);
 		panel.add(add);
 		
-		//L�schen Button
+		//Loeschen Button
 		delete = new JButton("Entfernen");
 		delete.setBounds(460, 140, 100, 25);
 		delete.addActionListener(this);
@@ -289,12 +289,12 @@ public class GUI implements ActionListener {
 	}
 	
 	public void addDropdown() {
-		//Dropdown f�r Geschlecht
+		//Dropdown fuer Geschlecht
 		geschlechter = new JComboBox<>(comboboxliste);
 		geschlechter.setBounds(280, 40, 100, 25);
 		panel.add(geschlechter);
 		
-		//Dropdown f�r Geschlecht
+		//Dropdown fuer Geschlecht
 		suchende = new JComboBox(suchenliste);
 		suchende.setBounds(90, 200, 125, 25);
 		panel.add(suchende);
