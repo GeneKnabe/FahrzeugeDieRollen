@@ -79,7 +79,7 @@ public class GUI implements ActionListener {
 	private String NAME;
 	private char GESCHLECHT;
 	private int ID;
-	private String AUTO;
+	private int AUTO;
 	private int NUMMER;
 	private String MARKE;
 	private String MODELL;
@@ -148,9 +148,9 @@ public class GUI implements ActionListener {
 			FARBE = farben.getText();
 			WERT = Integer.parseInt(werte.getText());
 			
-			//Ausf�hren der Funktionen mit �bergeben der Parameter (aus den Variablen)
-			daten.addPerson(NAME, GESCHLECHT);
-			daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
+			//daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
+            AUTO = daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
+            nummern.setText(String.valueOf(AUTO));
 			
 			
 		}
@@ -234,7 +234,6 @@ public class GUI implements ActionListener {
 		//ID Textbox
 		ids = new JTextField();
 		ids.setBounds(10, 40, 80, 25);
-		ids.setEditable(false);
 		panel.add(ids);
 		
 		//name Textbox
@@ -245,7 +244,7 @@ public class GUI implements ActionListener {
 		//Nummer Textbox
 		nummern = new JTextField();
 		nummern.setBounds(10, 140, 80, 25);
-		nummern.setEditable(false);
+		nummern.setEnabled(false);
 		panel.add(nummern);
 		
 		//Marke Textbox
