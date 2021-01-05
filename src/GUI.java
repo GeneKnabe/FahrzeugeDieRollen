@@ -134,14 +134,15 @@ public class GUI implements ActionListener {
 			
 			//Ausf�hren der Funktionen mit �bergeben der Parameter (aus den Variablen)
 			//ids.setText(daten.addPerson(NAME, GESCHLECHT));
-			daten.addPerson(NAME, GESCHLECHT);
-			
+			ID = daten.addPerson(NAME, GESCHLECHT);
+			ids.setText(String.valueOf(ID));
+			//daten.addPerson(NAME, GESCHLECHT);
 		}
 		if(e.getSource() == add) {
 			
 			//Speichern der eingegebenen Werte in Variablen
 			ID = Integer.parseInt(ids.getText());
-			NUMMER = Integer.parseInt(nummern.getText());
+			//NUMMER = Integer.parseInt(nummern.getText());
 			MARKE = marken.getText();
 			MODELL = modelle.getText();
 			FARBE = farben.getText();
