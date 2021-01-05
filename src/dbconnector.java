@@ -103,7 +103,6 @@ public class dbconnector implements IDATENHALTUNG {
 			name = rs.getString(2);
 			geschlecht = rs.getString(3).charAt(0);
 			}
-			//System.out.println("Kundennummer: "+ kundennummer + " Name: "+ name + " Gender: " + geschlecht);
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
@@ -152,8 +151,21 @@ public class dbconnector implements IDATENHALTUNG {
 	@Override
 	public ArrayList<person> getPersonen() {
 		ArrayList<person> personen = new ArrayList<>();
+		try {
+			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
+			rs = stmt.executeQuery("Select * from person;");
+			while(rs.next()) {	
+				int kundennummer = rs.getInt(1);
+				String name = rs.getString(2);
+				char geschlecht = rs.getString(3).charAt(0);
+				personen.add(new person(name, kundennummer, geschlecht));
+		} 
+		}catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 		return personen;
-	}
+		}
 	
 	@Override
 	public ArrayList<fahrzeug> getFahrzeuge(int Kundennummer) {

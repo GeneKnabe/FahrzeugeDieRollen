@@ -40,6 +40,7 @@ public class TUI {
 			System.out.println("Welche Kundennummer hat der Kunde?");
 			int kundennummer = scan.nextInt();
 			selected = daten.getPerson(kundennummer);
+			System.out.println(selected.getName() +" : "+ selected.getGeschlecht() + " : " + selected.getKundennummer()+ " aufgewählt");
 			break;
 		case 4:
 			ladeKunden();
