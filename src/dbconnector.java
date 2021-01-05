@@ -66,17 +66,19 @@ public class dbconnector implements IDATENHALTUNG {
 		
 	
 	@Override
-	public void addPerson(String name, char geschlecht) {
+	public int addPerson(String name, char geschlecht) {
 		// TODO Auto-generated method stub
 		try {
 			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
 			stmt.executeUpdate("INSERT INTO person (name, geschlecht) VALUES ('" + name + "', '" + geschlecht + "');");
 			rs = stmt.executeQuery("SELECT kundennummer FROM person WHERE '"+ name +"' = name AND '"+ geschlecht +"' = geschlecht;");
 			rs.next();
-			System.out.println("Kundennummer: "+ rs.getInt(1));
+			int kundennummer = rs.getInt(1);
+			return kundennummer;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
+		return 0;
 	}
 
 	@Override
@@ -97,9 +99,10 @@ public class dbconnector implements IDATENHALTUNG {
 		try {
 			stmt.executeUpdate("USE `FahrzeugeDieRollen`");
 			rs = stmt.executeQuery("Select * from Kunden where kundennummer is '" + kundennummer + "';");
-			name = rs.getString("name");
-			geschlecht = rs.getString("geschlecht").charAt(0);
+			name = rs.getString(2);
+			geschlecht = rs.getString(3).charAt(0);
 			System.out.println("Kundennummer: "+ kundennummer + " Name: "+ name + " Gender: " + geschlecht);
+			new person(name, kundennummer, geschlecht);
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}

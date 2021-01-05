@@ -33,7 +33,8 @@ public class TUI {
 			String name = scan.next(); 
 			System.out.println("Welches Geschlecht hat der Kunde? (Char)");
 			char geschlecht = scan.next().charAt(0);
-			daten.addPerson(name, geschlecht);
+			kundennummer = daten.addPerson(name, geschlecht);
+			System.out.println("Kundennummer ist: "+ kundennummer);
 			break;
 		case 2:
 			System.out.println("Welche Kundennummer hat der Kunde, welcher gelöscht werden soll");

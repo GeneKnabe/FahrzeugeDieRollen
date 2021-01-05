@@ -85,8 +85,6 @@ public class GUI implements ActionListener {
 	private String MODELL;
 	private String FARBE;
 	private int WERT;
-	
-	private String placeholder;
 
 	public GUI(dbconnector db) {
 		daten = db;
@@ -136,10 +134,6 @@ public class GUI implements ActionListener {
 			NAME = namen.getText();
 			placeholder = (String)geschlechter.getSelectedItem();
 			GESCHLECHT = placeholder.charAt(0);
-<<<<<<< HEAD
-
-=======
->>>>>>> da76a07bb08b42eb7e532b4e42baccea294d8491
 			NUMMER = Integer.parseInt(nummern.getText());
 			MARKE = marken.getText();
 			MODELL = modelle.getText();
