@@ -73,7 +73,7 @@ public class GUI implements ActionListener {
 	
 	
 	
-	//Variable zum übergeben und speichern in der Funktion
+	//Variable zum ï¿½bergeben und speichern in der Funktion
 	private String placeholder;
 	private int USER;
 	private String NAME;
@@ -85,6 +85,8 @@ public class GUI implements ActionListener {
 	private String MODELL;
 	private String FARBE;
 	private int WERT;
+	
+
 
 	public GUI(dbconnector db) {
 		daten = db;
@@ -124,23 +126,28 @@ public class GUI implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		//Aktion vom Button klicken
 		if(e.getSource() == check) {
-			ids.setText("");
-
+			
+			NAME = namen.getText();
+			placeholder = (String)geschlechter.getSelectedItem();
+			GESCHLECHT = placeholder.charAt(0);
+			
+			
+			//Ausfï¿½hren der Funktionen mit ï¿½bergeben der Parameter (aus den Variablen)
+			//ids.setText(daten.addPerson(NAME, GESCHLECHT));
+			daten.addPerson(NAME, GESCHLECHT);
+			
 		}
 		if(e.getSource() == add) {
 			
 			//Speichern der eingegebenen Werte in Variablen
 			ID = Integer.parseInt(ids.getText());
-			NAME = namen.getText();
-			placeholder = (String)geschlechter.getSelectedItem();
-			GESCHLECHT = placeholder.charAt(0);
 			NUMMER = Integer.parseInt(nummern.getText());
 			MARKE = marken.getText();
 			MODELL = modelle.getText();
 			FARBE = farben.getText();
 			WERT = Integer.parseInt(werte.getText());
 			
-			//Ausführen der Funktionen mit übergeben der Parameter (aus den Variablen)
+			//Ausfï¿½hren der Funktionen mit ï¿½bergeben der Parameter (aus den Variablen)
 			daten.addPerson(NAME, GESCHLECHT);
 			daten.addFahrzeug(MARKE, MODELL, FARBE, WERT, ID);
 			
@@ -152,7 +159,7 @@ public class GUI implements ActionListener {
 			ID = Integer.parseInt(ids.getText());
 			NUMMER = Integer.parseInt(nummern.getText());
 			
-			//Ausführen der Funktionen mit übergeben der Parameter (aus den Variablen)
+			//Ausfï¿½hren der Funktionen mit ï¿½bergeben der Parameter (aus den Variablen)
 			daten.delPerson(ID);
 			daten.delFahrzeug(NUMMER);
 			
@@ -190,29 +197,24 @@ public class GUI implements ActionListener {
 		auto.setBounds(10, 95, 130, 25);
 		panel.add(auto);
 		
-		//Fahrzeugnr. Text
-		nummer = new JLabel("Fahrzeugnr.");
-		nummer.setBounds(10, 115, 100, 25);
-		panel.add(nummer);
-		
 		//Marke Text
 		marke = new JLabel("Marke");
-		marke.setBounds(100, 115, 100, 25);
+		marke.setBounds(10, 115, 100, 25);
 		panel.add(marke);
 			
 		//Modell Text
 		modell = new JLabel("Modell");
-		modell.setBounds(190, 115, 100, 25);
+		modell.setBounds(100, 115, 100, 25);
 		panel.add(modell);
 		
 		//Farbe Text
 		farbe = new JLabel("Farbe");
-		farbe.setBounds(280, 115, 100, 25);
+		farbe.setBounds(190, 115, 100, 25);
 		panel.add(farbe);
 		
 		//Wert Text
 		wert = new JLabel("Wert");
-		wert.setBounds(370, 115, 100, 25);
+		wert.setBounds(280, 115, 100, 25);
 		panel.add(wert);
 		
 		//Suche nach: Text
@@ -234,29 +236,24 @@ public class GUI implements ActionListener {
 		namen.setBounds(100, 40, 160, 25);
 		panel.add(namen);
 		
-		//Nummer Textbox
-		nummern = new JTextField();
-		nummern.setBounds(10, 140, 80, 25);
-		panel.add(nummern);
-		
 		//Marke Textbox
 		marken = new JTextField();
-		marken.setBounds(100, 140, 80, 25);
+		marken.setBounds(10, 140, 80, 25);
 		panel.add(marken);
 		
 		//Modell Textbox
 		modelle = new JTextField();
-		modelle.setBounds(190, 140, 80, 25);
+		modelle.setBounds(100, 140, 80, 25);
 		panel.add(modelle);
 
 		//Farbe Textbox
 		farben = new JTextField();
-		farben.setBounds(280, 140, 80, 25);
+		farben.setBounds(190, 140, 80, 25);
 		panel.add(farben);
 		
 		//Wert Textbox
 		werte = new JTextField();
-		werte.setBounds(370, 140, 80, 25);
+		werte.setBounds(280, 140, 80, 25);
 		panel.add(werte);
 		
 		//Suchen Textbox
@@ -268,13 +265,13 @@ public class GUI implements ActionListener {
 	
 	public void addButton() {
 		//Check Button
-		check = new JButton("Check");
+		check = new JButton("Person");
 		check.setBounds(460, 40, 100, 25);
 		check.addActionListener(this);
 		panel.add(check);
 		
 		//Hinzufuegen Button
-		add = new JButton("Hinzufuegen");
+		add = new JButton("Auto");
 		add.setBounds(460, 110, 100, 25);
 		add.addActionListener(this);
 		panel.add(add);
